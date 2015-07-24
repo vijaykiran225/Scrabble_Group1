@@ -44,15 +44,6 @@ class CombinationGenerator
 				
 				wordCombination.add(s);
         }
-			
 		return wordCombination;
 	}
-	
-
-	 public static void main(String[] args) {
-            // TODO Auto-generated method stub
-            CombinationGenerator generator = new CombinationGenerator("abc");
-            generator.getWordCombination();
-                   
-            }
  }
