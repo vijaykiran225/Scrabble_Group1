@@ -7,14 +7,14 @@ public class WordSuggester {
     private String rack;
     private Map<String, List<Words>> dictionary;
 
-    public Scrabble(String rack, Map<String, List<Words> > dictionary){
+    public WordSuggester(String rack, Map<String, List<Words> > dictionary){
         max_score = 0;
         max_score_words = "";
         this.rack = rack;
         this.dictionary = dictionary;
     }
 
-    public Scrabble(){
+    public WordSuggester(){
         max_score = 0;
         max_score_words = "";
     }
@@ -135,7 +135,7 @@ public class WordSuggester {
             maxScoreWords.addAll(dictionary.get(validRackWord));
         }
         Collections.sort(maxScoreWords);
-        ArrayList<Scrabble_team_1.Words> wordSuggestions = new ArrayList<Scrabble_team_1.Words>();
+        ArrayList<Words> wordSuggestions = new ArrayList<Words>();
         for (int i = 0; i <= 10 && i < maxScoreWords.size(); i++) {
             wordSuggestions.add(maxScoreWords.get(i));
         }
