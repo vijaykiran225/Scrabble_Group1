@@ -50,7 +50,7 @@ class Blanks_constraint {
 	}
 	
 		
-	public boolean ifKeyExists(String word, HashMap<String,String> dictionary){
+	public boolean ifKeyExists(String word, HashMap<String,list<words>> dictionary){
 		
 		boolean wordexists = false;
 		if(word.contains("*"))
@@ -65,7 +65,7 @@ class Blanks_constraint {
 	}
 	
 	
-	public ArrayList<String> getValidkeys(ArrayList<String> keys, HashMap<String,String> dictionary)
+	public ArrayList<String> getValidkeys(ArrayList<String> keys, HashMap<String,list<words>> dictionary)
 	{
 		ArrayList<String> validkeys = null;
 		
