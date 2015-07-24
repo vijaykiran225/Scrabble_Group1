@@ -6,7 +6,7 @@ import java.util.List;
 public class Scrabble {
 
 	public static void main(String[] args) {
-		String word = "abcd";
+		String word = "ab**";
 		System.out.println(getCombinationsOfWord(word));
 	}
 
@@ -17,26 +17,15 @@ public class Scrabble {
 			for (int i = k + 1; i < word.length(); i++) {
 				String str1 = word.substring(k, i);
 				String str2 = word.substring(i, word.length());
-				System.out.println(str1 + "," + str2);
 				for (int j = 0; j < str2.length(); j++) {
 					String combinationWord = str1 + str2.charAt(j);
-					combinationsOfWord.add(combinationWord);
+					if (!combinationsOfWord.contains(combinationWord)) {
+						combinationsOfWord.add(combinationWord);
+					}
 				}
 			}
 		}
 		return combinationsOfWord;
-	}
-
-	public static String sortCharactersInWord(String word) {
-		char[] wordAsCharArray = word.toCharArray();
-		Arrays.sort(wordAsCharArray);
-		List<Character> wordAsCharList = new ArrayList<Character>();
-		for (int i = 0; i < wordAsCharArray.length; i++) {
-			wordAsCharList.add(wordAsCharArray[i]);
-		}
-		Collections.sort(wordAsCharList);
-		word = String.copyValueOf(wordAsCharArray);
-		return word;
 	}
 
 }
