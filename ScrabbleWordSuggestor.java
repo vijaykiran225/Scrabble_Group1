@@ -1,26 +1,28 @@
+import CoreDictionary;
+
 public class ScrabbleWordSuggestor
 {
 	
 	private CoreDictionary coreDictionary;
 	private String rack;
 	
-	public ScrabbleWordSuggestor (String fileName)
+	public ScrabbleWordSuggestor ()
 	{
-		coreDictionary = new CoreDictionary(fileName);
+		coreDictionary = new CoreDictionary();
 	}
 	
 	
-	public List<Word> getWordSuggestions(String rack)
+	public List<Words> getWordSuggestions(String rack)
 	{
 		
 	}
 	
-	public List<Word> getWordSuggestionsForBlankTile(String rack)
+	public List<Words> getWordSuggestionsForBlankTile(String rack)
 	{
 	
 	}
 	
-	public List<Word> getWordSuggestionsForConstraint(string rack)
+	public List<Words> getWordSuggestionsForConstraint(string rack)
 	{
 	
 	}
