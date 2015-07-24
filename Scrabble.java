@@ -7,19 +7,22 @@ import java.util.*;
 
 public class Scrabble {
 
-    private ArrayList<Word> valid_keys;
     private int max_score;
     private String max_score_words;
+    private String rack;
+    private HashMap<String, ArrayList<Words>> dictionary;
+	private scoreOfAlphabets = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
 
-    public Scrabble(){
-        valid_keys = new ArrayList<Word>();
+    public Scrabble(String rack, HashMap<String, ArrayList<Words> > dictionary){
         max_score = 0;
         max_score_words = "";
+        this.rack = rack;
+        this.dictionary = dictionary;
     }
 
-    public ArrayList<String> getCombinationsOfWord(String word) {
+    public ArrayList<Words> getCombinationsOfWord(String word) {
         word = sortCharactersInWord(word);
-        ArrayList<String> combinationsOfWord = new ArrayList<String>();
+        ArrayList<Words> combinationsOfWord = new ArrayList<Words>();
         for (int k = 0; k < word.length(); k++) {
             for (int i = k + 1; i < word.length(); i++) {
                 String str1 = word.substring(k, i);
@@ -27,7 +30,7 @@ public class Scrabble {
                 for (int j = 0; j < str2.length(); j++) {
                     String combinationWord = str1 + str2.charAt(j);
                     if (!combinationsOfWord.contains(combinationWord)) {
-                        combinationsOfWord.add(combinationWord);
+                        combinationsOfWord.add(getWord(combinationWord));
                     }
                 }
             }
@@ -37,50 +40,40 @@ public class Scrabble {
 
 
 
-    public Word getWord(String word){
-        Word w = new Word();
-        w.length = word.length();
-        w.score = getScore(word);
-        w.val = word;
-        w.prime_product = getPrimeProduct(word);
-        w.key = sortCharactersInWord(word);
-
+    public Words getWord(String word){
+        Words w = new Words(word, getScore(word));
         return w;
     }
 
     public int getScore(String word) {
-        int val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
+        
         int total = 0;
         for(int i = 0;i < word.length();i++)
         {
-            int c = ((int)word.charAt(i)) % 97;
-            total += val[c];
+            if(word.charAt(i)!='*')
+			{
+				total += scoreOfAlphabets[word.charAt(i)-'a'];
+			}
+            
         }
 
         return total;
     }
 
-    public long getPrimeProduct(String word){
-        int prime_numbers[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101};
-        long product = 1;
-        for (int i = 0; i < word.length(); i++)
-            product *= prime_numbers[(int)word.charAt(i) - 97];
 
-        return product;
-    }
 
     public String sort_word_byScore(String word){
-        int score_val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
+        
         TreeMap<Integer, String> temp_map = new TreeMap<Integer, String>();
         for (int i = 0; i < word.length(); i++){
-            int char_index = (int)word.charAt(i) % 97;
-            if (!temp_map.containsKey(score_val[char_index])){
+            int char_index = (int)word.charAt(i) % 'a';
+            if (!temp_map.containsKey(scoreOfAlphabets[char_index])){
                 String vect = "";
-                temp_map.put(score_val[char_index], vect);
+                temp_map.put(scoreOfAlphabets[char_index], vect);
             }
-            String val = temp_map.get(score_val[char_index]);
+            String val = temp_map.get(scoreOfAlphabets[char_index]);
             val += word.charAt(i);
-            temp_map.put(score_val[char_index], val);
+            temp_map.put(scoreOfAlphabets[char_index], val);
         }
 
         String temp_word  = "";
@@ -99,7 +92,7 @@ public class Scrabble {
     }
 
 
-    public boolean ifKeyExists(String word, HashMap<String,String> dictionary){
+    private boolean ifKeyExists(String word, HashMap<String, ArrayList<Words> > dictionary){
 
         boolean wordexists = false;
         if(word.contains("*"))
@@ -114,15 +107,47 @@ public class Scrabble {
     }
 
 
-    public void generate_valid_keys(ArrayList<Word> keys, HashMap<String,String> dictionary)
+    public ArrayList<String> generate_valid_keys(ArrayList<Words> keys, HashMap<String, ArrayList<Words> > dictionary)
     {
-        for(Word key: keys)
-            if(ifKeyExists(key.val, dictionary))
-                valid_keys.add(key);
+        ArrayList<String> valid_keys = new ArrayList<String>();
+        for(Words key: keys)
+            if(ifKeyExists(key.getWord(), dictionary))
+                valid_keys.add(key.getWord());
+
+        return valid_keys;
     }
 
-    public ArrayList<Word> getValidKeys()
+    public ArrayList<Words> generate_valid_words(ArrayList<Words> keys, HashMap<String, ArrayList<Words>> dictionary)
     {
+        ArrayList<Words> valid_keys = new ArrayList<Words>();
+        for(Words key: keys)
+            if(ifKeyExists(key.getWord(), dictionary))
+                valid_keys.add(key);
+
         return valid_keys;
+    }
+
+    public ArrayList<String> getValidKeys()
+    {
+        return generate_valid_keys(getCombinationsOfWord(rack), dictionary);
+    }
+
+    public ArrayList<Words> getValidWords()
+    {
+        return generate_valid_words(getCombinationsOfWord(rack), dictionary);
+    }
+
+    public ArrayList<Words> getMaxScoreWords(ArrayList<String> validRackCombinations,
+                                             Map<String, List<Words>> dictionary) {
+        ArrayList<Words> maxScoreWords = new ArrayList<Words>();
+        for (String validRackWord : validRackCombinations) {
+            maxScoreWords.addAll(dictionary.get(validRackWord));
+        }
+        Collections.sort(maxScoreWords);
+        ArrayList<Words> wordSuggestions = new ArrayList<Words>();
+        for (int i = 0; i <= 10 && i < maxScoreWords.size(); i++) {
+            wordSuggestions.add(maxScoreWords.get(i));
+        }
+        return wordSuggestions;
     }
 }
