@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Scrabble {
+public class WordSuggester {
 
     private int max_score;
     private String max_score_words;
