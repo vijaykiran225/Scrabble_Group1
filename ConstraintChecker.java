@@ -24,7 +24,7 @@ public class ConstraintChecker {
 		CoreDictionary cd = new CoreDictionary();
 		wordList = getWordList(cd.map , keyList); //remove this comment
 
-		return(getAllWords(wordList), constraint);
+		return(getAllWords(wordList, constraint));
 
 
 	}
