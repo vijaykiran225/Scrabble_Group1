@@ -11,6 +11,7 @@ public class Scrabble {
     private String max_score_words;
     private String rack;
     private HashMap<String, ArrayList<Words>> dictionary;
+	private scoreOfAlphabets = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
 
     public Scrabble(String rack, HashMap<String, ArrayList<Words> > dictionary){
         max_score = 0;
@@ -19,7 +20,7 @@ public class Scrabble {
         this.dictionary = dictionary;
     }
 
-    private ArrayList<Words> getCombinationsOfWord(String word) {
+    public ArrayList<Words> getCombinationsOfWord(String word) {
         word = sortCharactersInWord(word);
         ArrayList<Words> combinationsOfWord = new ArrayList<Words>();
         for (int k = 0; k < word.length(); k++) {
@@ -39,45 +40,40 @@ public class Scrabble {
 
 
 
-    private Words getWord(String word){
+    public Words getWord(String word){
         Words w = new Words(word, getScore(word));
-
         return w;
     }
 
     public int getScore(String word) {
-        int val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
+        
         int total = 0;
         for(int i = 0;i < word.length();i++)
         {
-            int c = ((int)word.charAt(i)) % 97;
-            total += val[c];
+            if(word.charAt(i)!='*')
+			{
+				total += scoreOfAlphabets[word.charAt(i)-'a'];
+			}
+            
         }
 
         return total;
     }
 
-    private long getPrimeProduct(String word){
-        int prime_numbers[] = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101};
-        long product = 1;
-        for (int i = 0; i < word.length(); i++)
-            product *= prime_numbers[(int)word.charAt(i) - 97];
 
-        return product;
-    }
 
-    private String sort_word_byScore(String word){
-        int score_val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
+    public String sort_word_byScore(String word){
+        
         TreeMap<Integer, String> temp_map = new TreeMap<Integer, String>();
         for (int i = 0; i < word.length(); i++){
-            int char_index = (int)word.charAt(i) % 97;
-            if (!temp_map.containsKey(score_val[char_index])){
+            int char_index = (int)word.charAt(i) % 'a';
+            if (!temp_map.containsKey(scoreOfAlphabets[char_index])){
                 String vect = "";
-                temp_map.put(score_val[char_index], vect);
+                temp_map.put(scoreOfAlphabets[char_index], vect);
             }
-            String val = temp_map.get(score_val[char_index]);
+            String val = temp_map.get(scoreOfAlphabets[char_index]);
             val += word.charAt(i);
-            temp_map.put(score_val[char_index], val);
+            temp_map.put(scoreOfAlphabets[char_index], val);
         }
 
         String temp_word  = "";
@@ -89,7 +85,7 @@ public class Scrabble {
         return temp_word;
     }
 
-    private String sortCharactersInWord(String word) {
+    public String sortCharactersInWord(String word) {
         char[] alphabets = word.toCharArray();
         Arrays.sort(alphabets);
         return new String(alphabets);
@@ -111,7 +107,7 @@ public class Scrabble {
     }
 
 
-    private ArrayList<String> generate_valid_keys(ArrayList<Words> keys, HashMap<String, ArrayList<Words> > dictionary)
+    public ArrayList<String> generate_valid_keys(ArrayList<Words> keys, HashMap<String, ArrayList<Words> > dictionary)
     {
         ArrayList<String> valid_keys = new ArrayList<String>();
         for(Words key: keys)
@@ -121,7 +117,7 @@ public class Scrabble {
         return valid_keys;
     }
 
-    private ArrayList<Words> generate_valid_words(ArrayList<Words> keys, HashMap<String, ArrayList<Words>> dictionary)
+    public ArrayList<Words> generate_valid_words(ArrayList<Words> keys, HashMap<String, ArrayList<Words>> dictionary)
     {
         ArrayList<Words> valid_keys = new ArrayList<Words>();
         for(Words key: keys)
