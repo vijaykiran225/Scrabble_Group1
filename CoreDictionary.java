@@ -1,4 +1,4 @@
-package scrabble;
+package scrabble.Scrabble_Group1;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,11 +17,11 @@ public class CoreDictionary {
 	public void setDictionary(Map<String, List<Words>> dictionary) {
 		this.dictionary = dictionary;
 	}
-
-	public CoreDictionary(){
-		populateDictionary("sowpods.txt");
+	
+	public CoreDictionary(String path){
+		populateDictionary(path);
 	}
-
+	
 	public void populateDictionary(String path) {
 		BufferedReader br = null;
 		try {
@@ -51,27 +51,22 @@ public class CoreDictionary {
 	}
 
 	public void addToHash(String word) {
-
-		SubsetGenerator wordCombinations = new SubsetGenerator(word);
+		CombinationGenerator wordCombinations = new CombinationGenerator(word);
 		Score s = new Score();
-		List<String> wordList = wordCombinations.getSubsets();
-
+		List<String> wordList = wordCombinations.getWordCombination();
+        
 		for (String line : wordList) {
-			String sortedWord = sortWord(word);
-			int score = s.getScores(line);
-
+			  System.out.println("words  " + line);  
+		         	
+		 	String sortedWord = sortWord(line);
+			int score = s.getScores(line);	          
+			
 			if (dictionary.containsKey(sortedWord)) {
 				dictionary.get(sortedWord).add(new Words(line,score));
-			} else {
+			} else {				
 				dictionary.put(sortedWord, new ArrayList<Words>());
 			    dictionary.get(sortedWord).add(new Words(line,score));
 			}
 		}
 	}
-
-	public static void main(String[] args) {
-		CoreDictionary bestWordSelector = new CoreDictionary();
-		bestWordSelector.populateDictionary(args[0]);
-	}
-
 }
