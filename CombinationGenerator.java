@@ -1,15 +1,17 @@
+import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.List;
 
-class SubsetGenerator
+class CombinationGenerator
  {
 	private String word;
-	public SubsetGenerator(String aWord)
+	public CombinationGenerator(String aWord)
 	{
 		word = aWord;
 	}
 
-	public ArrayList<String> getSubsets() {
-		ArrayList<String> Subsets = new ArrayList<String>();
+	private HashSet<String> getSubsets() {
+		HashSet<String> Subsets = new HashSet<String>();
 
 		if (word.length() == 0) {
 			Subsets.add(word);
@@ -19,8 +21,8 @@ class SubsetGenerator
 		for (int j = word.length()-1; j >= 0; j--) {
 			for (int i = j; i < word.length(); i++) {
 				String shorterWord =  word.substring(0, j) ;
-				SubsetGenerator shorterPermutationGenerator = new SubsetGenerator(shorterWord);
-				ArrayList<String> shorterWordPermutations = shorterPermutationGenerator.getSubsets();
+				CombinationGenerator shorterPermutationGenerator = new CombinationGenerator(shorterWord);
+				HashSet<String> shorterWordPermutations = shorterPermutationGenerator.getSubsets();
 				for (String s : shorterWordPermutations) {
 					Subsets.add(s + word.charAt(i));
 				}
@@ -29,16 +31,28 @@ class SubsetGenerator
 		return Subsets;
 	}
 	
-	public static void main(String[] args)
+	public List<String> getWordCombination()
 	{
-            SubsetGenerator generator = new SubsetGenerator("abc");
-            ArrayList<String> Subsets = generator.getSubsets();
-            for (String s : Subsets)
-            {
-                System.out.println(s);
-            }      
-    }
+        HashSet<String> Subsets = getSubsets();
+		List<String> wordCombination = new ArrayList<String> ();
+		for (String s : Subsets)
+        {
+                while (s.length() != word.length())
+				{
+					s += "*";
+				}
+				
+				wordCombination.add(s);
+        }
 			
+		return wordCombination;
+	}
 	
-	
+
+	 public static void main(String[] args) {
+            // TODO Auto-generated method stub
+            CombinationGenerator generator = new CombinationGenerator("abc");
+            generator.getWordCombination();
+                   
+            }
  }
