@@ -96,7 +96,7 @@ class Blanks_constraint {
 
         TreeMap<Integer, String> temp_map = new TreeMap<Integer, String>();
         for (int i = 0; i < word.length(); i++){
-            int char_index = (int)word.charAt(i) % 'a';
+            int char_index = (int)word.charAt(i) - 'a';
             if (!temp_map.containsKey(scoreOfAlphabets[char_index])){
                 String vect = "";
                 temp_map.put(scoreOfAlphabets[char_index], vect);
