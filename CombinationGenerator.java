@@ -9,7 +9,8 @@ class CombinationGenerator
 	{
 		word = aWord;
 	}
-
+	
+	
 	private HashSet<String> getSubsets() {
 		HashSet<String> Subsets = new HashSet<String>();
 
