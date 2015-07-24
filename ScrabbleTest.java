@@ -1,4 +1,4 @@
-
+package s;
 
 import static org.junit.Assert.*;
 
@@ -16,10 +16,22 @@ public class ScrabbleTest {
 		ArrayList<String> actual = scrabble.getCombinationsOfWord(rack);
 		ArrayList<String> expected = new ArrayList<String>();
 		expected.add("*a");
-		expected.add("*ab");
 		expected.add("*b");
+		expected.add("*ab");
 		expected.add("ab");
-		assertEquals(expected, actual,"incorrect combinations of rack");
+		assertEquals("incorrect combinations of rack", expected, actual);
+		rack = "d*c*";
+		actual = scrabble.getCombinationsOfWord(rack);
+		expected = new ArrayList<String>();
+		expected.add("**");
+		expected.add("*c");
+		expected.add("*d");
+		expected.add("**c");
+		expected.add("**d");
+		expected.add("**cd");
+		expected.add("*cd");
+		expected.add("cd");
+		assertEquals("incorrect combinations of rack", expected, actual);
 	}
 
 }
