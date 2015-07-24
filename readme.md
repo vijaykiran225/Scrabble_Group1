@@ -20,7 +20,8 @@ Work Allocation:
 Team 1:
 1.1 Harsha :create a Map of the dictionary of scrabble words with key as sorted word in alphabetical order and value as a list
 1.2 Vipin : Will generate all the combinations of the given strings
-1.3 Vijay : Returns  the score for each word by individually calculating the value for each letter 
+1.3 Vijay : Returns  the score for each word by individually calculating the value for each letter .
+		Every letter has an associated score and the score of a word is computed as the sum of the scores of its constituent let
 Team 2:
 	Given a rack by the user,the top 5 high scoring words are generated.
 	The system also takes into account of the blank tiles present on the board
