@@ -14,6 +14,7 @@ class Blanks_constraint {
     public static void main(String[] args){
         System.out.println(sort_word("azby"));
     }
+    
     public void generateAllScrabbleWords(){
 
     }
@@ -79,7 +80,6 @@ class Blanks_constraint {
 		return validkeys;
 	}
 
-<<<<<<< HEAD
     //not working yet to fix.
     public String sort_word(String word){
         Character word_arr[] = ArrayUtils.toObject(word.toCharArray());
@@ -114,27 +114,5 @@ class Blanks_constraint {
 
         return temp_word;
     }
-//    //not working yet to fix.
-//    public static String sort_word(String word){
-//        Character word_arr[] = ArrayUtils.toObject(word.toCharArray());
-//        Arrays.sort(word_arr, new Score_Comparator());
-//        for (Character c: word_arr)
-//            System.out.println(c);
-//        return new String(ArrayUtils.toPrimitive(word_arr));
-//    }
-//
-//    static class Score_Comparator implements Comparator<Character> {
-//        int score_val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
-//        public int compare(Character o1, Character o2) {
-//            if (score_val[(int)o1 % 97] > score_val[(int)o2 % 97]){
-//                System.out.println(o1 + ">" + o2);
-//                return o1;
-//            }
-//            return o2;
-//        }
-//
-//    }
-
-
 
 }
