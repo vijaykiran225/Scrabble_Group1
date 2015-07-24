@@ -9,6 +9,7 @@ import java.util.*;
  */
 class Blanks_constraint {
     public String rack = "**c**p**";
+    public scoreOfAlphabets = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
     ArrayList<Word> word_list = new ArrayList<Word>();
 
     public static void main(String[] args){
@@ -29,13 +30,13 @@ class Blanks_constraint {
     }
 
     public int getScore(String word){
-        int val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
+        
         int total = 0;
         for (int i = 0; i < word.length(); i++)
         {  	
         	if(word.charAt(i)!='*')
         	{
-        		total += val[word.charAt(i)-'a'];
+        		total += scoreOfAlphabets[word.charAt(i)-'a'];
         	}
         }
 
@@ -93,17 +94,16 @@ class Blanks_constraint {
 
     public static String sort_word(String word){
 
-        int score_val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
         TreeMap<Integer, String> temp_map = new TreeMap<Integer, String>();
         for (int i = 0; i < word.length(); i++){
             int char_index = (int)word.charAt(i) % 'a';
-            if (!temp_map.containsKey(score_val[char_index])){
+            if (!temp_map.containsKey(scoreOfAlphabets[char_index])){
                 String vect = "";
-                temp_map.put(score_val[char_index], vect);
+                temp_map.put(scoreOfAlphabets[char_index], vect);
             }
-            String val = temp_map.get(score_val[char_index]);
+            String val = temp_map.get(scoreOfAlphabets[char_index]);
             val += word.charAt(i);
-            temp_map.put(score_val[char_index], val);
+            temp_map.put(scoreOfAlphabets[char_index], val);
         }
 
         String temp_word  = "";
