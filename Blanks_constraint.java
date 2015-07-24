@@ -87,9 +87,9 @@ class Blanks_constraint {
     }
 
     static class Score_Comparator implements Comparator<Character> {
-=======
+
     public static String sort_word(String word){
->>>>>>> 42492ea64b732004c45d425f670800e5968d232d
+
         int score_val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
         TreeMap<Integer, String> temp_map = new TreeMap<Integer, String>();
         for (int i = 0; i < word.length(); i++){
