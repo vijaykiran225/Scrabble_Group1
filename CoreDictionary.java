@@ -1,4 +1,4 @@
-package scrabble.Scrabble_Group1.Scrabble_Group1;
+//package scrabble.Scrabble_Group1.Scrabble_Group1;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

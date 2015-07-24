@@ -1,4 +1,4 @@
-package Scrabble_team_1;
+//package Scrabble_team_1;
 
 import org.apache.commons.lang.ArrayUtils;
 

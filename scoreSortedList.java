@@ -1,4 +1,4 @@
-package scrabble.Scrabble_Group1;
+//package scrabble.Scrabble_Group1;
 import java.util.*;
 import CoreDictionary.java;
 class scoreSortedList {

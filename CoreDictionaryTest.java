@@ -1,4 +1,4 @@
-package scrabble.Scrabble_Group1;
+//package scrabble.Scrabble_Group1;
 
 import static org.junit.Assert.*;
 
