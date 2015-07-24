@@ -1,6 +1,5 @@
-package scrabble;
 
-public class Words {
+public class Words implements Comparable<Words> {
 	private String word;
 	private int score;
 
@@ -25,4 +24,8 @@ public class Words {
 		this.score = score;
 	}
 
+	@Override
+	public int compareTo(Words o) {
+		return Integer.compare(this.getScore(), o.getScore());
+	}
 }
