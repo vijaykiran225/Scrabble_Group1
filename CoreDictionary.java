@@ -1,4 +1,4 @@
-package scrabble.Scrabble_Group1;
+package scrabble.Scrabble_Group1.Scrabble_Group1;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -55,9 +55,7 @@ public class CoreDictionary {
 		Score s = new Score();
 		List<String> wordList = wordCombinations.getWordCombination();
         
-		for (String line : wordList) {
-			  System.out.println("words  " + line);  
-		         	
+		for (String line : wordList) {     	
 		 	String sortedWord = sortWord(line);
 			int score = s.getScores(line);	          
 			
