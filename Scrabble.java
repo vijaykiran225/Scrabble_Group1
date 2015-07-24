@@ -42,7 +42,6 @@ public class Scrabble {
 
     private Words getWord(String word){
         Words w = new Words(word, getScore(word));
-
         return w;
     }
 
@@ -67,7 +66,7 @@ public class Scrabble {
         
         TreeMap<Integer, String> temp_map = new TreeMap<Integer, String>();
         for (int i = 0; i < word.length(); i++){
-            int char_index = (int)word.charAt(i) % 97;
+            int char_index = (int)word.charAt(i) % 'a';
             if (!temp_map.containsKey(scoreOfAlphabets[char_index])){
                 String vect = "";
                 temp_map.put(scoreOfAlphabets[char_index], vect);
