@@ -1,35 +1,28 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
+import java.util.regex.Pattern;
+ 
 public class ConstraintChecker {
 
-	public static void main(){
-
-		ConstraintChecker cc = new ConstraintChecker();
-		cc.wordWithConstraints("abcdef" , "g**b");
-
-	}
-
-
-	public List<String> wordWithConstraints(String rack, String constraint) {
-
+	public static List<String> wordWithConstraints(String rack, String constraint) {
+		
 		List<String> keyList = new ArrayList<String>();
-		Word obj = new Word();
-		keyList = obj.getValidKeys(getNewRack(rack, constraint));
-
+		CoreDictionary cd = new CoreDictionary("C:/Users/test/Desktop/sowpods.txt");
+		Scrabble sc = new Scrabble(getNewRack(rack,constraint), cd.getDictionary());
+		
+		keyList = sc.getValidKeys();
+		System.out.println(keyList);
+		
 		List<String> wordList = new ArrayList<String>();
-		CoreDictionary cd = new CoreDictionary();
-		wordList = getWordList(cd.map , keyList); //remove this comment
-
-		return(getAllWords(wordList, constraint));
-
-
+		wordList = getWordList(cd.getDictionary() , keyList); 
+		
+		return getAllWords(wordList, constraint);
+		
 	}
-	public String getNewRack(String rack, String constraint){
-
+	public static String getNewRack(String rack, String constraint){
+		
 		int index = 0;
 		int len = constraint.length();
 		while( index < len){
@@ -40,41 +33,45 @@ public class ConstraintChecker {
 			index++;
 		}
 		return rack;
-
+		
 	}
-	public static List<String> getWordList(HashMap<String, List<String>> map, List<String> keyList){
-
-		List<String> wordList = new ArrayList<String>();
-		Iterator<Map.Entry<String, List<String>>> entries = map.entrySet().iterator();
-
-		while (entries.hasNext()) {
-
-		    Map.Entry<String, List<String>> entry = entries.next();
-		    Iterator<String> itr = entry.getValue().iterator();
-
+	public static List<String> getWordList(Map<String, List<Words>> map, List<String> keyList){
+		
+		
+		    List<String> wordList = new ArrayList<String>();
+		    Iterator<String> itr = keyList.iterator();
+		    
 		    while(itr.hasNext()){
-		    	String anagram = itr.next();
-		    	wordList.add(anagram);
+		    	
+		    	List<Words> anagram = map.get(itr.next());
+		    	Iterator<Words> itr2 = anagram.iterator();
+		    	
+		    	while(itr2.hasNext()){
+		    		wordList.add((itr2.next()).getWord());
+		    	}
 		    }
-
-		}
-		return wordList;
+		
+		return wordList;		
 	}
+	
 	public static boolean wordMatches(String constraint, String word){
-		return Pattern.matches(word, getRegEx(constraint));
+		return Pattern.matches( getRegEx(constraint),word);
 	}
 
-	public static ArrayList<String> getAllWords(ArrayList<String> wordList,String constraint){
+	public static ArrayList<String> getAllWords(List<String> wordList,String constraint){
+		
 		ArrayList<String> legalWords= new ArrayList<String>();
 		for(String words : wordList){
-			if(wordMatches(words,constraint)){
+			if(wordMatches(constraint , words)){
 				legalWords.add(words);
 			}
 		}
+		System.out.println(legalWords);
 		return legalWords;
 	}
 
 	public static String getRegEx(String constraint){
+		
 		String regEx = ".*";
 		char[] charConstraint = constraint.toCharArray();
 		for(char c : charConstraint){
@@ -85,9 +82,7 @@ public class ConstraintChecker {
 				regEx=regEx+"[a-z]";
 			}
 		}
-
 		regEx = regEx + ".*";
 		return regEx;
 	}
-
 }
