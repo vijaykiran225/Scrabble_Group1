@@ -8,14 +8,35 @@ public class ConstraintChecker {
 
 	public static void main(){
 		
-		String rack = "xyddjke", constraint = " ***gb";
-		Word obj = new Word();
+		ConstraintChecker cc = new ConstraintChecker();
+		cc.wordWithConstraints("abcdef" , "***gb");
+		
+	}
+	public List<String> wordWithConstraints(String rack, String constraint) {
+		
 		List<String> keyList = new ArrayList<String>();
+		Word obj = new Word();
+		keyList = obj.getValidKeys(getNewRack(rack, constraint));
+		
 		List<String> wordList = new ArrayList<String>();
-		keyList = obj.getCombinationsOfWord(rack);
 		CoreDictionary cd = new CoreDictionary();
-		 
-		wordList = getWordList(cd.map , keyList);
+		wordList = getWordList(cd.map , keyList); //remove this comment
+		
+		return wordList;
+		
+	}
+	public String getNewRack(String rack, String constraint){
+		
+		int index = 0;
+		int len = constraint.length();
+		while( index < len){
+			char ch = constraint.charAt(index);
+			if('a' <= ch && ch <= 'z') {
+				rack += ch;
+			}
+			index++;
+		}
+		return rack;
 		
 	}
 	public static List<String> getWordList(HashMap<String, List<String>> map, List<String> keyList){
