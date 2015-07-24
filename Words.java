@@ -1,31 +1,37 @@
-
 public class Words implements Comparable<Words> {
-	private String word;
-	private int score;
+    private String word;
+    private int score;
+    private int length;
+    private String key;
 
-	public Words(String word, int score) {
-		this.word = word;
-		this.score = score;
-	}
+    public Words(String word, int score) {
+        this.word = word;
+        this.length = word.length();
+        this.score = score;
+    }
 
-	public String getWord() {
-		return word;
-	}
+    public String getWord() {
+        return word;
+    }
 
-	public void setWord(String word) {
-		this.word = word;
-	}
+    public void setWord(String word) {
+        this.word = word;
+    }
 
-	public int getScore() {
-		return score;
-	}
+    public int getScore() {
+        return score;
+    }
 
-	public void setScore(int score) {
-		this.score = score;
-	}
+    public void setScore(int score) {
+        this.score = score;
+    }
 
-	@Override
-	public int compareTo(Words o) {
-		return Integer.compare(this.getScore(), o.getScore());
-	}
+    public int getLength(){
+        return length;
+    }
+
+
+    public int compareTo(Words o) {
+        return Integer.compare(this.getScore(), o.getScore());
+    }
 }
