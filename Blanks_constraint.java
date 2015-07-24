@@ -71,7 +71,7 @@ class Blanks_constraint {
 		
 		for(String key: keys)
 		{
-			if(ifExists(key,dictionary))
+			if(ifKeyExists(key,dictionary))
 			{
 				validkeys.add(key);
 			}
