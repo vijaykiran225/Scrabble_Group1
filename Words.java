@@ -34,4 +34,9 @@ public class Words implements Comparable<Words> {
     public int compareTo(Words o) {
         return Integer.compare(this.getScore(), o.getScore());
     }
+	
+	public String toString()
+	{
+		return "Word : " + getWord() + " --- "  +" Score : " + getScore();
+	}
 }

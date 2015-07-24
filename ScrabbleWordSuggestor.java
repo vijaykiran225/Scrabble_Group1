@@ -17,6 +17,14 @@ public class ScrabbleWordSuggestor
 	
 	}
 	
+	public void printWordSuggestions(List<Words> wordSuggestion)
+	{
+		for (Words word : wordSuggestion)
+		{
+			// print the word and the score.
+		}
+	}
+	
 	public static void main (String[] arg)
 	{
 		ScrabbleWordSuggestor scrabbleWordSugggestor = new ScrabbleWordSuggestor();
