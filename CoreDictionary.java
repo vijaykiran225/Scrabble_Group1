@@ -17,11 +17,11 @@ public class CoreDictionary {
 	public void setDictionary(Map<String, List<Words>> dictionary) {
 		this.dictionary = dictionary;
 	}
-	
+
 	public CoreDictionary(){
 		populateDictionary("sowpods.txt");
 	}
-	
+
 	public void populateDictionary(String path) {
 		BufferedReader br = null;
 		try {
@@ -55,14 +55,14 @@ public class CoreDictionary {
 		SubsetGenerator wordCombinations = new SubsetGenerator(word);
 		Score s = new Score();
 		List<String> wordList = wordCombinations.getSubsets();
-     
+
 		for (String line : wordList) {
 			String sortedWord = sortWord(word);
-			int score = s.getScores(line);	          
-			
+			int score = s.getScores(line);
+
 			if (dictionary.containsKey(sortedWord)) {
 				dictionary.get(sortedWord).add(new Words(line,score));
-			} else {				
+			} else {
 				dictionary.put(sortedWord, new ArrayList<Words>());
 			    dictionary.get(sortedWord).add(new Words(line,score));
 			}
