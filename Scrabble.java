@@ -20,7 +20,7 @@ public class Scrabble {
         this.dictionary = dictionary;
     }
 
-    private ArrayList<Words> getCombinationsOfWord(String word) {
+    public ArrayList<Words> getCombinationsOfWord(String word) {
         word = sortCharactersInWord(word);
         ArrayList<Words> combinationsOfWord = new ArrayList<Words>();
         for (int k = 0; k < word.length(); k++) {
@@ -40,7 +40,7 @@ public class Scrabble {
 
 
 
-    private Words getWord(String word){
+    public Words getWord(String word){
         Words w = new Words(word, getScore(word));
         return w;
     }
@@ -62,7 +62,7 @@ public class Scrabble {
 
 
 
-    private String sort_word_byScore(String word){
+    public String sort_word_byScore(String word){
         
         TreeMap<Integer, String> temp_map = new TreeMap<Integer, String>();
         for (int i = 0; i < word.length(); i++){
@@ -85,7 +85,7 @@ public class Scrabble {
         return temp_word;
     }
 
-    private String sortCharactersInWord(String word) {
+    public String sortCharactersInWord(String word) {
         char[] alphabets = word.toCharArray();
         Arrays.sort(alphabets);
         return new String(alphabets);
@@ -107,7 +107,7 @@ public class Scrabble {
     }
 
 
-    private ArrayList<String> generate_valid_keys(ArrayList<Words> keys, HashMap<String, ArrayList<Words> > dictionary)
+    public ArrayList<String> generate_valid_keys(ArrayList<Words> keys, HashMap<String, ArrayList<Words> > dictionary)
     {
         ArrayList<String> valid_keys = new ArrayList<String>();
         for(Words key: keys)
@@ -117,7 +117,7 @@ public class Scrabble {
         return valid_keys;
     }
 
-    private ArrayList<Words> generate_valid_words(ArrayList<Words> keys, HashMap<String, ArrayList<Words>> dictionary)
+    public ArrayList<Words> generate_valid_words(ArrayList<Words> keys, HashMap<String, ArrayList<Words>> dictionary)
     {
         ArrayList<Words> valid_keys = new ArrayList<Words>();
         for(Words key: keys)
