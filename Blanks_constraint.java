@@ -31,8 +31,11 @@ class Blanks_constraint {
         int val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
         int total = 0;
         for (int i = 0; i < word.length(); i++)
-        {
-            total += val[word.charAt(i)-'a'];
+        {  	
+        	if(word.charAt(i)!='*')
+        	{
+        		total += val[word.charAt(i)-'a'];
+        	}
         }
 
         return total;
