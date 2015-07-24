@@ -9,8 +9,10 @@ public class  Score{
 		for(int i=0;i<word.length();i++)
 		{
 			int c=((int)word.charAt(i)) % valueofA;
-
+			if(c >=0 && c<26){
 			total+=ScrabbleScores[c];
+			}
+			
 		}
 
 	    return total;
