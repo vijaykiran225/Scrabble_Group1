@@ -10,9 +10,9 @@ public class Scrabble {
     private int max_score;
     private String max_score_words;
     private String rack;
-    private HashMap<String, Words> dictionary;
+    private HashMap<String, ArrayList<Words>> dictionary;
 
-    public Scrabble(String rack, HashMap<String, Words> dictionary){
+    public Scrabble(String rack, HashMap<String, ArrayList<Words> > dictionary){
         max_score = 0;
         max_score_words = "";
         this.rack = rack;
@@ -96,7 +96,7 @@ public class Scrabble {
     }
 
 
-    private boolean ifKeyExists(String word, HashMap<String, Words> dictionary){
+    private boolean ifKeyExists(String word, HashMap<String, ArrayList<Words> > dictionary){
 
         boolean wordexists = false;
         if(word.contains("*"))
@@ -111,7 +111,7 @@ public class Scrabble {
     }
 
 
-    private ArrayList<String> generate_valid_keys(ArrayList<Words> keys, HashMap<String, Words> dictionary)
+    private ArrayList<String> generate_valid_keys(ArrayList<Words> keys, HashMap<String, ArrayList<Words> > dictionary)
     {
         ArrayList<String> valid_keys = new ArrayList<String>();
         for(Words key: keys)
@@ -121,7 +121,7 @@ public class Scrabble {
         return valid_keys;
     }
 
-    private ArrayList<Words> generate_valid_words(ArrayList<Words> keys, HashMap<String, Words> dictionary)
+    private ArrayList<Words> generate_valid_words(ArrayList<Words> keys, HashMap<String, ArrayList<Words>> dictionary)
     {
         ArrayList<Words> valid_keys = new ArrayList<Words>();
         for(Words key: keys)
