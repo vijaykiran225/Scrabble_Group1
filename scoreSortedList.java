@@ -1,3 +1,4 @@
+package scrabble.Scrabble_Group1;
 import java.util.*;
 import CoreDictionary.java;
 class scoreSortedList {
@@ -15,7 +16,7 @@ class scoreSortedList {
   private static List<String> sortList(List<String> legalWordList){
 
      CoreDictionary coreDictionary = new CoreDictionary();
-     Map<String,List<Words>> dictionary = new HashMap<String,List<Words>>();
+     Map<String,List<Words>> dictionary = coreDictionary.getDictionary();
      for (String s : legalWordList){
             legalWordList.remove(s);
             s = s + dictionary.get(sortWord(s)).getScore();
