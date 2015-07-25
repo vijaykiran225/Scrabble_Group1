@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  
 public class ConstraintChecker {
 
-	public static List<String> wordWithConstraints(String rack, String constraint,ScrabbleWords cd) {
+	public static List<String> wordWithConstraints(String rack, String constraint) {
 		
 		List<String> keyList = new ArrayList<String>();
 		WordSuggester ws = new WordSuggester(getNewRack(rack,constraint));
