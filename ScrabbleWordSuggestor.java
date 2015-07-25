@@ -6,7 +6,7 @@ public class ScrabbleWordSuggestor
 	
 	public ScrabbleWordSuggestor ()
 	{   
-		this.coreDictionary = ScrabbleWords.getCoreDictionaryObject();
+		this.coreDictionary = ScrabbleWords.getInstance();
 	}
 	
 	public void wordSuggestions(String rack)
