@@ -1,3 +1,5 @@
+package Scrabble_Group1;
+
 import java.util.List;
 import java.util.logging.Logger;
 public class ScrabbleWordSuggestor
@@ -6,7 +8,7 @@ public class ScrabbleWordSuggestor
 	
 	public ScrabbleWordSuggestor ()
 	{   
-		this.coreDictionary = ScrabbleWords.getCoreDictionaryObject();
+		this.coreDictionary = ScrabbleWords.getInstance();
 	}
 	
 	public void wordSuggestions(String rack)
@@ -35,7 +37,7 @@ public class ScrabbleWordSuggestor
 	{
 		ScrabbleWordSuggestor scrabbleWordSuggester = new ScrabbleWordSuggestor();
     	scrabbleWordSuggester.wordSuggestions("dabge");
-    	System.out.println("\n\n");
+    	System.out.println("\n\n***");
 		scrabbleWordSuggester.wordSuggestions("abelo","h*l");
 		
 	}

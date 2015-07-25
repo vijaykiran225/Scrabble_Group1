@@ -17,7 +17,7 @@ public class ScrabbleWords {
 	
 	public static ScrabbleWords getInstance(){
 		if(dict == null){
-			dict = new ScrabbleWords("finaltest.txt");
+			dict = new ScrabbleWords("C:/Training/Scrabble/ScrabbleV2/src/Scrabble_Group1/testCoreDictionary.txt");
 		}
 		return dict;
 	}
