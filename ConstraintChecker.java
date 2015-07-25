@@ -22,7 +22,7 @@ public class ConstraintChecker {
 		return getAllWords(wordList, constraint);
 		
 	}
-	public static String getNewRack(String rack, String constraint){
+	private static String getNewRack(String rack, String constraint){
 		
 		int index = 0;
 		int len = constraint.length();
@@ -36,7 +36,7 @@ public class ConstraintChecker {
 		return rack;
 		
 	}
-	public static List<String> getWordList(List<String> keyList){
+	private static List<String> getWordList(List<String> keyList){
 		
 		    List<String> wordList = new ArrayList<String>();
 		    Iterator<String> itr = keyList.iterator();
@@ -49,11 +49,11 @@ public class ConstraintChecker {
 		return wordList;		
 	}
 	
-	public static boolean wordMatches(String constraint, String word){
+	private static boolean wordMatches(String constraint, String word){
 		return Pattern.matches(getRegEx(constraint), word);
 	}
 
-	public static List<String> getAllWords(List<String> wordList, String constraint){
+	private static List<String> getAllWords(List<String> wordList, String constraint){
 		
 		List<String> legalWords = new ArrayList<String>();
 			for(String word : wordList){
@@ -66,7 +66,7 @@ public class ConstraintChecker {
 		
 	}
 
-	public static String getRegEx(String constraint){
+	private static String getRegEx(String constraint){
 		
 		String regEx = ".*";
 		char[] charConstraint = constraint.toCharArray();
