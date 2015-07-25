@@ -7,14 +7,12 @@ public class WordSuggester {
 	private int max_score;
 	private String max_score_words;
 	private String rack;
-	private Map<String, List<String>> dictionary;
 	private final int NUMBER_OF_WORDS = 10;
 
-	public WordSuggester(String rack, Map<String, List<String>> dictionary) {
+	public WordSuggester(String rack) {
 		max_score = 0;
 		max_score_words = "";
 		this.rack = rack;
-		this.dictionary = dictionary;
 	}
 
 	public WordSuggester() {
