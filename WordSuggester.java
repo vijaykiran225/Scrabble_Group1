@@ -1,3 +1,5 @@
+package Scrabble_Group1;
+
 import java.util.*;
 
 public class WordSuggester {
@@ -50,12 +52,11 @@ public class WordSuggester {
         return totalScore;
     }
 
-
     private String sort_word_byScore(String word){
         int score_val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
         TreeMap<Integer, String> temp_map = new TreeMap<Integer, String>();
         for (int i = 0; i < word.length(); i++){
-            int char_index = (int)word.charAt - 'a';
+            int char_index = (int)word.charAt(i) - 'a';
             if (!temp_map.containsKey(score_val[char_index])){
                 String vect = "";
                 temp_map.put(score_val[char_index], vect);
@@ -82,7 +83,6 @@ public class WordSuggester {
 
     private boolean ifKeyExists(String word, Map<String, List<Words> > dictionary){
 
-        boolean wordexists = false;
         if(word.contains("*"))
         {
             return dictionary.containsKey(word);
@@ -98,7 +98,6 @@ public class WordSuggester {
     {
         List<String> valid_keys = new ArrayList<String>();
         for(String key: keys) {
-            System.out.println(key);
             if (ifKeyExists(key, dictionary))
                 valid_keys.add(key);
         }
@@ -110,7 +109,6 @@ public class WordSuggester {
     {
         List<Words> valid_keys = new ArrayList<Words>();
         for(Words key: keys) {
-            System.out.println(key.getWord());
             if (ifKeyExists(key.getWord(), dictionary))
                 valid_keys.add(key);
         }

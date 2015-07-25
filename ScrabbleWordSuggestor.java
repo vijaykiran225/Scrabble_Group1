@@ -1,27 +1,26 @@
-import ConstraintChecker;
-import WordSuggester;
-import CoreDictionary;
+package Scrabble_Group1;
 
+import java.util.List;
+import java.util.logging.Logger;
 public class ScrabbleWordSuggestor
 {
-	private String rack;
 	private CoreDictionary coreDictionary;
 	
 	public ScrabbleWordSuggestor ()
-	{
-		coreDictionary = new CoreDictionary();
+	{   
+		this.coreDictionary = CoreDictionary.getCoreDictionaryObject();
 	}
 	
-	public List<Words> wordSuggestions(String rack)
+	public void wordSuggestions(String rack)
 	{
-		WordSuggestor wordSuggestor = new WordSuggestor (rack, coreDictionary.getDictionary());
-		List<Words> wordSuggestions = wordSuggestor.getMaxWords ();
+		WordSuggester wordSuggestor = new WordSuggester (rack,coreDictionary.getDictionary());
+		List<Words> wordSuggestions = wordSuggestor.getMaxScoreWords();
 		printWordSuggestions(wordSuggestions);
 	}
 	
 	public void wordSuggestionsForConstraint(String rack, String constraint)
 	{
-		List<Words> wordSuggestions = ConstraintChecker.wordWithConstraints(rack, constraint);
+		List<Words> wordSuggestions = ConstraintChecker.wordWithConstraints(rack, constraint,this.coreDictionary);
 		printWordSuggestions(wordSuggestions);
 	}
 	
@@ -35,7 +34,11 @@ public class ScrabbleWordSuggestor
 	
 	public static void main (String[] arg)
 	{
-		ScrabbleWordSuggestor scrabbleWordSugggestor = new ScrabbleWordSuggestor();
+		ScrabbleWordSuggestor scrabbleWordSuggester = new ScrabbleWordSuggestor();
+    	scrabbleWordSuggester.wordSuggestions("dabge");
+    	//Logger.getLogger(arg0)
+    	System.out.println("\n\n");
+		scrabbleWordSuggester.wordSuggestionsForConstraint("abelo","h*l");
 		
 	}
 }

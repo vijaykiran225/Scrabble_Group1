@@ -1,3 +1,5 @@
+package Scrabble_Group1;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -9,14 +11,15 @@ import java.util.regex.Pattern;
 
 public class ConstraintChecker {
 
-	public static List<Words> wordWithConstraints(String rack, String constraint) {
+	public static List<Words> wordWithConstraints(String rack, String constraint,CoreDictionary cd) {
 		
 		List<String> keyList = new ArrayList<String>();
-		CoreDictionary cd = new CoreDictionary("C:/Users/test/Desktop/sowpods.txt");
-		Scrabble sc = new Scrabble(getNewRack(rack,constraint), cd.getDictionary());
+	//	CoreDictionary cd = new CoreDictionary("C:/Users/test/Desktop/sowpods.txt");
+	//	CoreDictionary cd = CoreDictionary.getCoreDictionaryObject();
+		WordSuggester sc = new WordSuggester(getNewRack(rack,constraint), cd.getDictionary());
 		
 		keyList = sc.getValidKeys();
-		System.out.println(keyList);
+	//System.out.println(keyList);
 		
 		List<Words> wordList = new ArrayList<Words>();
 		wordList = getWordList(cd.getDictionary(), keyList); 
@@ -69,9 +72,11 @@ public class ConstraintChecker {
 				legalWords.add(word);
 			}
 		}
+    		
 		
-		System.out.println(legalWords);
-		Collections.sort(legalWords);
+	//	System.out.println(legalWords);
+		Collections.sort(legalWords,new WordComparator());
+		
 		ListIterator<Words> li = legalWords.listIterator(legalWords.size());	
 		while(li.hasPrevious() && finalList.size() < 5) {
 			  finalList.add(li.previous());
@@ -97,4 +102,5 @@ public class ConstraintChecker {
 		regEx = regEx + ".*";
 		return regEx;
 	}
+	
 }

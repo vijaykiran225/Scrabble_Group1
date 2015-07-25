@@ -1,3 +1,5 @@
+package Scrabble_Group1;
+
 //package scrabble.Scrabble_Group1.Scrabble_Group1;
 
 import java.io.BufferedReader;
@@ -7,9 +9,17 @@ import java.util.*;
 
 public class CoreDictionary {
 
-
-	private Map<String, List<Words>> dictionary = new HashMap<String, List<Words>>();
-
+    private static CoreDictionary dict = null;
+	private Map<String, List<Words>> dictionary;
+		
+	
+	public static CoreDictionary getCoreDictionaryObject(){
+		if(dict == null){
+			dict = new CoreDictionary("finaltest_10kw.txt");
+		}
+		return dict;
+	}
+	
 	public Map<String, List<Words>> getDictionary() {
 		return dictionary;
 	}
@@ -18,9 +28,12 @@ public class CoreDictionary {
 		this.dictionary = dictionary;
 	}
 	
-	public CoreDictionary(String path){
+	private CoreDictionary(String path){
+		dictionary = new HashMap<String, List<Words>>();
 		populateDictionary(path);
+		
 	}
+
 	
 	public void populateDictionary(String path) {
 		BufferedReader br = null;
@@ -51,9 +64,9 @@ public class CoreDictionary {
 	}
 
 	public void addToHash(String word) {
-		CombinationGenerator wordCombinations = new CombinationGenerator(word);
+		KeyCombinationGenerater wordCombinations = new KeyCombinationGenerater(word);
 		Score s = new Score();
-		List<String> wordList = wordCombinations.getWordCombination();
+		List<String> wordList = wordCombinations.getKeyCombination();
         
 		for (String line : wordList) {     	
 		 	String sortedWord = sortWord(line);
@@ -62,6 +75,7 @@ public class CoreDictionary {
 			if (dictionary.containsKey(sortedWord)) {
 				dictionary.get(sortedWord).add(new Words(line,score));
 			} else {				
+				//System.out.println(line+ ":" + score);
 				dictionary.put(sortedWord, new ArrayList<Words>());
 			    dictionary.get(sortedWord).add(new Words(line,score));
 			}
