@@ -40,40 +40,6 @@ public class WordSuggester {
         return combinationsOfWord;
     }
 
-    public int getScore(String word) {
-        int alphabetsValue[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
-        int totalScore = 0;
-        for(int i = 0;i < word.length();i++)
-        {
-           
-        	totalScore += alphabetsValue[word.charAt(i)-'a'];
-        }
-
-        return totalScore;
-    }
-    
-    public int getScore(String word,int alphabetsValue[]) {
-        
-    	int totalScore = 0;
-        for(int i = 0;i < word.length();i++)
-        {
-        	totalScore += alphabetsValue[word.charAt(i)-'a'];
-        }
-
-        return totalScore;
-    }
-    
-    public int getLexicographicalScore(String word,int alphabetsValue[]) {
-        
-    	int totalScore = 0;
-        for(int i = 0;i < word.length();i++)
-        {
-        	totalScore += (word.charAt(i)-'a'+1);
-        }
-
-        return totalScore;
-    }
-    
     private String sort_word_byScore(String word){
         int score_val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
         TreeMap<Integer, String> temp_map = new TreeMap<Integer, String>();
