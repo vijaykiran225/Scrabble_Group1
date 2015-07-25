@@ -12,7 +12,7 @@ public class ScrabbleTest {
 	@Test
 	public void testGetCombinationsOfWord() {
 		String rack = "ab*";
-		Scrabble scrabble = new Scrabble();
+		ScrabbleTest scrabble = new ScrabbleTest();
 		ArrayList<String> actual = scrabble.getCombinationsOfWord(rack);
 		ArrayList<String> expected = new ArrayList<String>();
 		expected.add("*a");
