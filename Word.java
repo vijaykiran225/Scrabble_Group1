@@ -1,12 +1,12 @@
 package Scrabble_Group1;
 
-public class Words implements Comparable<Words> {
+public class Word implements Comparable<Word> {
     private String word;
     private int score;
     private int length;
     private String key;
 
-    public Words(String word, int score) {
+    public Word(String word, int score) {
         this.word = word;
         this.length = word.length();
         this.score = score;
@@ -33,7 +33,7 @@ public class Words implements Comparable<Words> {
     }
 
 
-    public int compareTo(Words o) {
+    public int compareTo(Word o) {
         return Integer.compare(o.getScore(),this.getScore());
     }
 	
