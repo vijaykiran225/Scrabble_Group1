@@ -94,7 +94,7 @@ public class WordSuggester {
 		return MaxScoreWords(generate_valid_keys(getCombinationsOfWord(rack)));
 	}
 
-	public List<Word> getMaxScoreWords(String rack, String constraint, ScrabbleWords coreDictionary) {
+	public List<Word> getMaxScoreWords(String rack, String constraint) {
 		return getTopTenWordSuggestions(ConstraintChecker.wordWithConstraints(rack, constraint));
 	}
 }
