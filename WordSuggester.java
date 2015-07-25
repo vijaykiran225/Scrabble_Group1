@@ -6,7 +6,8 @@ public class WordSuggester {
     private String max_score_words;
     private String rack;
     private Map<String, List<Words>> dictionary;
-
+    private final int NUMBER_OF_WORDS = 10;
+    
     public WordSuggester(String rack, Map<String, List<Words> > dictionary){
         max_score = 0;
         max_score_words = "";
@@ -130,7 +131,7 @@ public class WordSuggester {
         }
         Collections.sort(maxScoreWords);
         ArrayList<Words> wordSuggestions = new ArrayList<Words>();
-        for (int i = 0; i <= 10 && i < maxScoreWords.size(); i++) {
+        for (int i = 0; i <= NUMBER_OF_WORDS && i < maxScoreWords.size(); i++) {
             wordSuggestions.add(maxScoreWords.get(i));
         }
         return wordSuggestions;
