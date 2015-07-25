@@ -39,25 +39,41 @@ public class WordSuggester {
         return combinationsOfWord;
     }
 
-    private Words getWord(String word){
-        Words w = new Words(word, getScore(word));
-
-        return w;
-    }
-
     public int getScore(String word) {
         int val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
         int total = 0;
         for(int i = 0;i < word.length();i++)
         {
-            int c = ((int)word.charAt(i)) % 97;
-            total += val[c];
+           
+            total += val[word.charAt(i)-'a'];
         }
 
         return total;
     }
 
-  
+    private String sort_word_byScore(String word){
+        int score_val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
+        TreeMap<Integer, String> temp_map = new TreeMap<Integer, String>();
+        for (int i = 0; i < word.length(); i++){
+            int char_index = (int)word.charAt(i) - 'a';
+            if (!temp_map.containsKey(score_val[char_index])){
+                String vect = "";
+                temp_map.put(score_val[char_index], vect);
+            }
+            String val = temp_map.get(score_val[char_index]);
+            val += word.charAt(i);
+            temp_map.put(score_val[char_index], val);
+        }
+
+        String temp_word  = "";
+        for(Map.Entry<Integer, String> entry : temp_map.entrySet()) {
+            System.out.println(entry.getKey() +"->" + entry.getValue());
+            temp_word += entry.getValue();
+        }
+
+        return temp_word;
+    }
+
     private String sortCharactersInWord(String word) {
         char[] alphabets = word.toCharArray();
         Arrays.sort(alphabets);
