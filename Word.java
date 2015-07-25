@@ -1,9 +1,11 @@
 package Scrabble_Group1;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * <b>User-defined</b> class containing word traits
  */
-public class Word implements Comparable<Word> {
+class Word implements Comparable<Word> {
     private String word;
     private int score;
     private int length;
@@ -33,12 +35,14 @@ public class Word implements Comparable<Word> {
         return score;
     }
 
+
+
     /**
      * Used to compare to words
      * @param comparedWord Word to be compared with
      * @return 1 if the comparedWord has an equivalent score, else 0
      */
-    public int compareTo(Word comparedWord) {
+    public int compareTo(@NotNull Word comparedWord) {
         return Integer.compare(comparedWord.getScore(), this.getScore());
     }
 

@@ -1,11 +1,14 @@
 package Scrabble_Group1;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * <b>Sub Wrapper</b> class to get all valid keys and maximum scoring words from a rack
  */
-public class WordSuggester {
+class WordSuggester {
     private String rack;
 	private final int NUMBER_OF_WORDS = 10;
 
@@ -56,9 +59,8 @@ public class WordSuggester {
      */
 	public List<Word> getMaxScoreWords() {
         ArrayList<String> maxScoreWords = new ArrayList<String>();
-        for (String validRackWord : getValidKeys()) {
+        for (String validRackWord : getValidKeys())
             maxScoreWords.addAll(ScrabbleWords.getWords(validRackWord));
-        }
         return getTopTenWordSuggestions(maxScoreWords);
 	}
 

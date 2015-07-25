@@ -1,18 +1,18 @@
 package Scrabble_Group1;
 
 
-import static org.junit.Assert.*;
-
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+
 public class ScrabbleWordsTest {
-		ScrabbleWords d;
-		@Before
+
+	    @Before
 		public void setUp() {
-			d = ScrabbleWords.getInstance();
+		ScrabbleWords d = ScrabbleWords.getInstance();
 		}
 		
         @Test
@@ -22,8 +22,8 @@ public class ScrabbleWordsTest {
         
         	String testString = new String(rack);
         	System.out.println(testString);
-        	List<String> words = d.getWords(testString);
-        //	if(words!=null)
-        	assertEquals(1,words.size());
+        	List<String> words = ScrabbleWords.getWords(testString);
+			assert words != null;
+			assertEquals(1, words.size());
         }
 }

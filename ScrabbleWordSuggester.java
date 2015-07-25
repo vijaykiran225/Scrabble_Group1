@@ -7,11 +7,10 @@ import java.util.List;
  */
 public class ScrabbleWordSuggester
 {
-	private ScrabbleWords coreDictionary;
-	
-	public ScrabbleWordSuggester()
-	{   
-		this.coreDictionary = ScrabbleWords.getInstance();
+
+    public ScrabbleWordSuggester()
+	{
+        ScrabbleWords coreDictionary = ScrabbleWords.getInstance();
 	}
 
     /**

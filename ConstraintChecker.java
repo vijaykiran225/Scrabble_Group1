@@ -1,17 +1,15 @@
 package Scrabble_Group1;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
 import java.util.regex.Pattern;
+
+import static Scrabble_Group1.ScrabbleWords.getWords;
 
 /**
  * <b>Internal</b> Class for retrieving list of words generated from rack satisfying the constraints
  */
-public class ConstraintChecker {
+class ConstraintChecker {
 
 	/**
 	 * finds all words possible using the rack satisfying the board constraint
@@ -46,10 +44,10 @@ public class ConstraintChecker {
 	private static List<String> getWordList(List<String> keyList){
 
 		    List<String> wordList = new ArrayList<String>();
-		    Iterator<String> itr = keyList.iterator();
-		    
-		    while(itr.hasNext())
-		    	wordList.addAll(ScrabbleWords.getInstance().getWords(itr.next()));
+
+		for (String aKeyList : keyList) {
+			wordList.addAll(getWords(aKeyList));
+		}
 
 		return wordList;		
 	}

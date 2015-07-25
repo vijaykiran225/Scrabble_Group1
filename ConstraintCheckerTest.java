@@ -1,13 +1,6 @@
 package Scrabble_Group1;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import Scrabble_Group1.ConstraintChecker;
 import org.junit.Before;
-import org.junit.Test;
 
 public class ConstraintCheckerTest {
 

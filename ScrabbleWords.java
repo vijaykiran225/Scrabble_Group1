@@ -54,7 +54,7 @@ public class ScrabbleWords {
 
 	/**
 	 * Checks if the key is valid or not
-	 * @param key
+	 * @param key key passed to check validity
 	 * @return true if the key exists
 	 */
 	public boolean isValidKey(String key) {
@@ -85,8 +85,7 @@ public class ScrabbleWords {
 	private static String sortWord(String originalString) {
 		char[] chars = originalString.toCharArray();
 		Arrays.sort(chars);
-		String sortedString = new String(chars);
-		return sortedString;
+		return new String(chars);
 	}
 
 	private void addToHash(String word) {
