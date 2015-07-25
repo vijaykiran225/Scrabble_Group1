@@ -3,7 +3,7 @@ Vipin
 Vijay
 Harsha
 Aishwarya
-Shomu Jyoti
+Soumyajyoti
 Priyanshu
 Bhavana
 Medha 

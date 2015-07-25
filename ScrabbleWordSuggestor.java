@@ -1,5 +1,3 @@
-
-
 import java.util.List;
 import java.util.logging.Logger;
 public class ScrabbleWordSuggestor
@@ -8,20 +6,20 @@ public class ScrabbleWordSuggestor
 	
 	public ScrabbleWordSuggestor ()
 	{   
-		this.coreDictionary = ScrabbleWords.getCoreDictionaryObject();
+		this.coreDictionary = ScrabbleWords.getInstance();
 	}
 	
 	public void wordSuggestions(String rack)
 	{
-		WordSuggester wordSuggestor = new WordSuggester (rack,coreDictionary.getDictionary());
+		WordSuggester wordSuggestor = new WordSuggester (rack);
 		List<Word> wordSuggestions = wordSuggestor.getMaxScoreWords();
 		printWordSuggestions(wordSuggestions);
 	}
 	
 	public void wordSuggestions(String rack, String constraint)
 	{
-		WordSuggester wordSuggestor = new WordSuggester (rack,coreDictionary.getDictionary());
-		List<Word> wordSuggestions = wordSuggestor.getMaxScoreWords(rack, constraint,this.coreDictionary);
+		WordSuggester wordSuggestor = new WordSuggester (rack);
+		List<Word> wordSuggestions = wordSuggestor.getMaxScoreWords(rack, constraint);
 		printWordSuggestions(wordSuggestions);
 	}
 	

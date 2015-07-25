@@ -1,3 +1,4 @@
+package Scrabble_Group1;
 
 import java.util.*;
 
@@ -6,14 +7,12 @@ public class WordSuggester {
 	private int max_score;
 	private String max_score_words;
 	private String rack;
-	private Map<String, List<Word>> dictionary;
 	private final int NUMBER_OF_WORDS = 10;
 
-	public WordSuggester(String rack, Map<String, List<Word>> dictionary) {
+	public WordSuggester(String rack) {
 		max_score = 0;
 		max_score_words = "";
 		this.rack = rack;
-		this.dictionary = dictionary;
 	}
 
 	public WordSuggester() {
@@ -39,40 +38,6 @@ public class WordSuggester {
 		return combinationsOfWord;
 	}
 
-	public int getScore(String word) {
-		int alphabetsValue[] = { 1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10 };
-		int totalScore = 0;
-		for (int i = 0; i < word.length(); i++) {
-
-			totalScore += alphabetsValue[word.charAt(i) - 'a'];
-		}
-
-		return totalScore;
-	}
-
-	private String sort_word_byScore(String word) {
-		int score_val[] = { 1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10 };
-		TreeMap<Integer, String> temp_map = new TreeMap<Integer, String>();
-		for (int i = 0; i < word.length(); i++) {
-			int char_index = (int) word.charAt(i) - 'a';
-			if (!temp_map.containsKey(score_val[char_index])) {
-				String vect = "";
-				temp_map.put(score_val[char_index], vect);
-			}
-			String val = temp_map.get(score_val[char_index]);
-			val += word.charAt(i);
-			temp_map.put(score_val[char_index], val);
-		}
-
-		String temp_word = "";
-		for (Map.Entry<Integer, String> entry : temp_map.entrySet()) {
-			System.out.println(entry.getKey() + "->" + entry.getValue());
-			temp_word += entry.getValue();
-		}
-
-		return temp_word;
-	}
-
 	private String sortCharactersInWord(String word) {
 		char[] alphabets = word.toCharArray();
 		Arrays.sort(alphabets);
@@ -89,20 +54,10 @@ public class WordSuggester {
 
 	}
 
-	private List<String> generate_valid_keys(List<String> keys, Map<String, List<Word>> dictionary) {
+	private List<String> generate_valid_keys(List<String> keys) {
 		List<String> valid_keys = new ArrayList<String>();
 		for (String key : keys) {
-			if (ifKeyExists(key, dictionary))
-				valid_keys.add(key);
-		}
-
-		return valid_keys;
-	}
-
-	private List<Word> generate_valid_words(List<Word> keys, Map<String, List<Word>> dictionary) {
-		List<Word> valid_keys = new ArrayList<Word>();
-		for (Word key : keys) {
-			if (ifKeyExists(key.getWord(), dictionary))
+			if (ScrabbleWords.getInstance().isValidKey(key))
 				valid_keys.add(key);
 		}
 
@@ -110,31 +65,36 @@ public class WordSuggester {
 	}
 
 	public List<String> getValidKeys() {
-		return generate_valid_keys(getCombinationsOfWord(rack), dictionary);
+		return generate_valid_keys(getCombinationsOfWord(rack));
 	}
 
-	public List<Word> MaxScoreWords(List<String> validRackCombinations, Map<String, List<Word>> dictionary) {
-		ArrayList<Word> maxScoreWords = new ArrayList<Word>();
+	public List<Word> MaxScoreWords(List<String> validRackCombinations) {
+		ArrayList<String> maxScoreWords = new ArrayList<String>();
 		for (String validRackWord : validRackCombinations) {
-			maxScoreWords.addAll(dictionary.get(validRackWord));
+			maxScoreWords.addAll(ScrabbleWords.getWords(validRackWord));
 		}
 		return getTopTenWordSuggestions(maxScoreWords);
 	}
 
-	private List<Word> getTopTenWordSuggestions(List<Word> list) {
-		Collections.sort(list);
+	private List<Word> getTopTenWordSuggestions(List<String> words) {
+		ArrayList<Word> wordList = new ArrayList<Word>();
+		for (String word : words) {
+			int score = Score.getScores(word);
+			wordList.add(new Word(word, score));
+		}
+		Collections.sort(wordList);
 		ArrayList<Word> wordSuggestions = new ArrayList<Word>();
-		for (int i = 0; i <= NUMBER_OF_WORDS && i < list.size(); i++) {
-			wordSuggestions.add(list.get(i));
+		for (int i = 0; i <= NUMBER_OF_WORDS && i < wordList.size(); i++) {
+			wordSuggestions.add(wordList.get(i));
 		}
 		return wordSuggestions;
 	}
 
 	public List<Word> getMaxScoreWords() {
-		return MaxScoreWords(generate_valid_keys(getCombinationsOfWord(rack), dictionary), dictionary);
+		return MaxScoreWords(generate_valid_keys(getCombinationsOfWord(rack)));
 	}
 
-	public List<Word> getMaxScoreWords(String rack, String constraint, ScrabbleWords coreDictionary) {
-		return getTopTenWordSuggestions(ConstraintChecker.wordWithConstraints(rack, constraint, coreDictionary));
+	public List<Word> getMaxScoreWords(String rack, String constraint) {
+		return getTopTenWordSuggestions(ConstraintChecker.wordWithConstraints(rack, constraint));
 	}
 }
