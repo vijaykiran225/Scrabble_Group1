@@ -1,5 +1,8 @@
 package Scrabble_Group1;
 
+/**
+ * <b>User-defined</b> class containing word traits
+ */
 public class Word implements Comparable<Word> {
     private String word;
     private int score;

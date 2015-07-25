@@ -2,6 +2,9 @@ package Scrabble_Group1;
 
 import java.util.List;
 
+/**
+ * <b>Main Wrapper</b> class containing all the APIs
+ */
 public class ScrabbleWordSuggester
 {
 	private ScrabbleWords coreDictionary;

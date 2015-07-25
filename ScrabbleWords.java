@@ -5,13 +5,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * <b>Internal</b> class to read and store the Scrabble word list
+ */
 public class ScrabbleWords {
 
     private static ScrabbleWords dict = null;
 	private static Map<String, List<String>> dictionary;
 
 	/**
-	 * Checks if an object of ScrabbleWord already exists and creates a new object of not
+	 * Checks if an object of ScrabbleWords already exists and creates a new object of not
 	 * @return Singleton Instance of this class
 	 * @see ScrabbleWords
 	 */

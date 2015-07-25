@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.regex.Pattern;
- 
+
+/**
+ * <b>Internal</b> Class for retrieving list of words generated from rack satisfying the constraints
+ */
 public class ConstraintChecker {
 
 	/**

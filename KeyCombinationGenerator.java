@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <b>Internal</b> class for generating all possible keys from a word
+ */
 class KeyCombinationGenerator
  {
 	private String word;

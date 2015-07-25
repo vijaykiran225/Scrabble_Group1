@@ -2,6 +2,9 @@ package Scrabble_Group1;
 
 import java.util.*;
 
+/**
+ * <b>Sub Wrapper</b> class to get all valid keys and maximum scoring words from a rack
+ */
 public class WordSuggester {
     private String rack;
 	private final int NUMBER_OF_WORDS = 10;
