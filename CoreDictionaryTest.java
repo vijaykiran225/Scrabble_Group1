@@ -7,10 +7,10 @@ import org.junit.Test;
 
 public class CoreDictionaryTest {
 
-	CoreDictionary d;
+	ScrabbleWords d;
 	@Before
 	public void setUp() {
-		d = new CoreDictionary("testdoc.txt");
+		d = new ScrabbleWords("testdoc.txt");
 	}
 	
 
@@ -27,7 +27,7 @@ public class CoreDictionaryTest {
 	@Test
 	public void testAddToHash() {
 		String testString = "tel";
-		CoreDictionary l = new CoreDictionary("testdoc2.txt");
+		ScrabbleWords l = new ScrabbleWords("testdoc2.txt");
 		l.addToHash(testString);
 		assertEquals(l.getDictionary().size(),7);
 		

@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 public class ConstraintChecker {
 
-	public static List<Words> wordWithConstraints(String rack, String constraint,CoreDictionary cd) {
+	public static List<Word> wordWithConstraints(String rack, String constraint,ScrabbleWords cd) {
 		
 		List<String> keyList = new ArrayList<String>();
 	//	CoreDictionary cd = new CoreDictionary("C:/Users/test/Desktop/sowpods.txt");
@@ -21,7 +21,7 @@ public class ConstraintChecker {
 		keyList = sc.getValidKeys();
 	//System.out.println(keyList);
 		
-		List<Words> wordList = new ArrayList<Words>();
+		List<Word> wordList = new ArrayList<Word>();
 		wordList = getWordList(cd.getDictionary(), keyList); 
 		
 		return getAllWords(wordList, constraint);
@@ -41,15 +41,15 @@ public class ConstraintChecker {
 		return rack;
 		
 	}
-	public static List<Words> getWordList(Map<String, List<Words>> map, List<String> keyList){
+	public static List<Word> getWordList(Map<String, List<Word>> map, List<String> keyList){
 		
-		    List<Words> wordList = new ArrayList<Words>();
+		    List<Word> wordList = new ArrayList<Word>();
 		    Iterator<String> itr = keyList.iterator();
 		    
 		    while(itr.hasNext()){
 		    	
-		    	List<Words> anagram = map.get(itr.next());
-		    	Iterator<Words> itr2 = anagram.iterator();
+		    	List<Word> anagram = map.get(itr.next());
+		    	Iterator<Word> itr2 = anagram.iterator();
 		    	
 		    	while(itr2.hasNext()){
 		    		wordList.add((itr2.next()));
@@ -63,11 +63,11 @@ public class ConstraintChecker {
 		return Pattern.matches(getRegEx(constraint), word);
 	}
 
-	public static ArrayList<Words> getAllWords(List<Words> wordList, String constraint){
+	public static ArrayList<Word> getAllWords(List<Word> wordList, String constraint){
 		
-		ArrayList<Words> legalWords = new ArrayList<Words>();
-		ArrayList<Words> finalList = new ArrayList<Words>();
-		for(Words word : wordList){
+		ArrayList<Word> legalWords = new ArrayList<Word>();
+		ArrayList<Word> finalList = new ArrayList<Word>();
+		for(Word word : wordList){
 			if(wordMatches(constraint , word.getWord())){
 				legalWords.add(word);
 			}
@@ -77,7 +77,7 @@ public class ConstraintChecker {
 	//	System.out.println(legalWords);
 		Collections.sort(legalWords,new WordComparator());
 		
-		ListIterator<Words> li = legalWords.listIterator(legalWords.size());	
+		ListIterator<Word> li = legalWords.listIterator(legalWords.size());	
 		while(li.hasPrevious() && finalList.size() < 5) {
 			  finalList.add(li.previous());
 			}
