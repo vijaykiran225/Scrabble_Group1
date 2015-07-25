@@ -63,7 +63,7 @@ public class WordSuggester {
         return totalScore;
     }
     
-public int getLexicographicalScore(String word,int alphabetsValue[]) {
+    public int getLexicographicalScore(String word,int alphabetsValue[]) {
         
     	int totalScore = 0;
         for(int i = 0;i < word.length();i++)
