@@ -27,7 +27,7 @@ public class ConstraintChecker {
 	}
 
 	private static String getNewRack(String rack, String constraint){
-		
+
 		int index = 0;
 		while( index < constraint.length()){
 			char ch = constraint.charAt(index);
@@ -41,7 +41,7 @@ public class ConstraintChecker {
 	}
 
 	private static List<String> getWordList(List<String> keyList){
-		
+
 		    List<String> wordList = new ArrayList<String>();
 		    Iterator<String> itr = keyList.iterator();
 		    
@@ -69,7 +69,7 @@ public class ConstraintChecker {
 	}
 
 	private static String getRegEx(String constraint){
-		
+
 		String regEx = ".*";
 		char[] charConstraint = constraint.toCharArray();
 		for(char c : charConstraint) {
