@@ -8,7 +8,8 @@ public class WordSuggester {
     private String max_score_words;
     private String rack;
     private Map<String, List<Words>> dictionary;
-
+    private final int NUMBER_OF_WORDS = 10;
+    
     public WordSuggester(String rack, Map<String, List<Words> > dictionary){
         max_score = 0;
         max_score_words = "";
@@ -40,15 +41,15 @@ public class WordSuggester {
     }
 
     public int getScore(String word) {
-        int val[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
-        int total = 0;
+        int alphabetsValue[] = {1,3,3,2,1,4,2,4,1,8,5,1,3,1,1,3,10,1,1,1,1,4,4,8,4,10};
+        int totalScore = 0;
         for(int i = 0;i < word.length();i++)
         {
            
-            total += val[word.charAt(i)-'a'];
+        	totalScore += alphabetsValue[word.charAt(i)-'a'];
         }
 
-        return total;
+        return totalScore;
     }
 
     private String sort_word_byScore(String word){
@@ -128,7 +129,7 @@ public class WordSuggester {
         }
         Collections.sort(maxScoreWords);
         ArrayList<Words> wordSuggestions = new ArrayList<Words>();
-        for (int i = 0; i <= 10 && i < maxScoreWords.size(); i++) {
+        for (int i = 0; i <= NUMBER_OF_WORDS && i < maxScoreWords.size(); i++) {
             wordSuggestions.add(maxScoreWords.get(i));
         }
         return wordSuggestions;
