@@ -4,30 +4,30 @@ import java.util.List;
 import java.util.logging.Logger;
 public class ScrabbleWordSuggestor
 {
-	private CoreDictionary coreDictionary;
+	private ScrabbleWords coreDictionary;
 	
 	public ScrabbleWordSuggestor ()
 	{   
-		this.coreDictionary = CoreDictionary.getCoreDictionaryObject();
+		this.coreDictionary = ScrabbleWords.getCoreDictionaryObject();
 	}
 	
 	public void wordSuggestions(String rack)
 	{
 		WordSuggester wordSuggestor = new WordSuggester (rack,coreDictionary.getDictionary());
-		List<Words> wordSuggestions = wordSuggestor.getMaxScoreWords();
+		List<Word> wordSuggestions = wordSuggestor.getMaxScoreWords();
 		printWordSuggestions(wordSuggestions);
 	}
 	
 	public void wordSuggestions(String rack, String constraint)
 	{
 		WordSuggester wordSuggestor = new WordSuggester (rack,coreDictionary.getDictionary());
-		List<Words> wordSuggestions = wordSuggestor.getMaxScoreWords(rack, constraint,this.coreDictionary);
+		List<Word> wordSuggestions = wordSuggestor.getMaxScoreWords(rack, constraint,this.coreDictionary);
 		printWordSuggestions(wordSuggestions);
 	}
 	
-	public void printWordSuggestions(List<Words> wordSuggestion)
+	public void printWordSuggestions(List<Word> wordSuggestion)
 	{
-		for (Words word : wordSuggestion)
+		for (Word word : wordSuggestion)
 		{
 			System.out.println(word);
 		}
