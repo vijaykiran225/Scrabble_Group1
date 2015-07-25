@@ -1,4 +1,4 @@
-package Scrabble_Group1;
+
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -18,9 +18,10 @@ public class ScrabbleWordSuggestor
 		printWordSuggestions(wordSuggestions);
 	}
 	
-	public void wordSuggestionsForConstraint(String rack, String constraint)
+	public void wordSuggestions(String rack, String constraint)
 	{
-		List<Words> wordSuggestions = ConstraintChecker.wordWithConstraints(rack, constraint,this.coreDictionary);
+		WordSuggester wordSuggestor = new WordSuggester (rack,coreDictionary.getDictionary());
+		List<Words> wordSuggestions = wordSuggestor.getMaxScoreWords(rack, constraint,this.coreDictionary);
 		printWordSuggestions(wordSuggestions);
 	}
 	
@@ -36,9 +37,8 @@ public class ScrabbleWordSuggestor
 	{
 		ScrabbleWordSuggestor scrabbleWordSuggester = new ScrabbleWordSuggestor();
     	scrabbleWordSuggester.wordSuggestions("dabge");
-    	//Logger.getLogger(arg0)
     	System.out.println("\n\n");
-		scrabbleWordSuggester.wordSuggestionsForConstraint("abelo","h*l");
+		scrabbleWordSuggester.wordSuggestions("abelo","h*l");
 		
 	}
 }
