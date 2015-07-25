@@ -1,3 +1,5 @@
+package Scrabble_Group1;
+
 //package Scrabble_team_1;
 
 /**

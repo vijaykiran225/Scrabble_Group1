@@ -1,3 +1,5 @@
+package Scrabble_Group1;
+
 import java.util.*;
 
 /** Sorting Strings in Unicode order. */

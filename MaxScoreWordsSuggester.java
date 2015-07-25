@@ -1,3 +1,5 @@
+package Scrabble_Group1;
+
 //package s;
 
 import java.util.ArrayList;
