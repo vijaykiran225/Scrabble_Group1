@@ -8,21 +8,16 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.regex.Pattern;
  
-
 public class ConstraintChecker {
 
-	public static List<Word> wordWithConstraints(String rack, String constraint,ScrabbleWords cd) {
+	public static List<String> wordWithConstraints(String rack, String constraint,ScrabbleWords cd) {
 		
 		List<String> keyList = new ArrayList<String>();
-	//	CoreDictionary cd = new CoreDictionary("C:/Users/test/Desktop/sowpods.txt");
-	//	CoreDictionary cd = CoreDictionary.getCoreDictionaryObject();
-		WordSuggester sc = new WordSuggester(getNewRack(rack,constraint), cd.getDictionary());
-		
-		keyList = sc.getValidKeys();
-	//System.out.println(keyList);
-		
-		List<Word> wordList = new ArrayList<Word>();
-		wordList = getWordList(cd.getDictionary(), keyList); 
+		WordSuggester ws = new WordSuggester(getNewRack(rack,constraint));
+		keyList = ws.getValidKeys();
+	
+		List<String> wordList = new ArrayList<String>();
+		wordList = getWordList(keyList); 
 		
 		return getAllWords(wordList, constraint);
 		
@@ -41,20 +36,15 @@ public class ConstraintChecker {
 		return rack;
 		
 	}
-	public static List<Word> getWordList(Map<String, List<Word>> map, List<String> keyList){
+	public static List<String> getWordList(List<String> keyList){
 		
-		    List<Word> wordList = new ArrayList<Word>();
+		    List<String> wordList = new ArrayList<String>();
 		    Iterator<String> itr = keyList.iterator();
 		    
 		    while(itr.hasNext()){
 		    	
-		    	List<Word> anagram = map.get(itr.next());
-		    	Iterator<Word> itr2 = anagram.iterator();
-		    	
-		    	while(itr2.hasNext()){
-		    		wordList.add((itr2.next()));
-		    	}
-		    }
+		    	wordList.addAll(ScrabbleWords.getInstance().getWords(itr.next()));
+		    }	
 		
 		return wordList;		
 	}
@@ -63,27 +53,16 @@ public class ConstraintChecker {
 		return Pattern.matches(getRegEx(constraint), word);
 	}
 
-	public static ArrayList<Word> getAllWords(List<Word> wordList, String constraint){
+	public static List<String> getAllWords(List<String> wordList, String constraint){
 		
-		ArrayList<Word> legalWords = new ArrayList<Word>();
-		ArrayList<Word> finalList = new ArrayList<Word>();
-		for(Word word : wordList){
-			if(wordMatches(constraint , word.getWord())){
+		List<String> legalWords = new ArrayList<String>();
+			for(String word : wordList){
+				if(wordMatches(constraint , word)){
 				legalWords.add(word);
 			}
 		}
     		
-		
-	//	System.out.println(legalWords);
-		Collections.sort(legalWords,new WordComparator());
-		
-		ListIterator<Word> li = legalWords.listIterator(legalWords.size());	
-		while(li.hasPrevious() && finalList.size() < 5) {
-			  finalList.add(li.previous());
-			}
-
-		return finalList;
-		
+		return legalWords;
 		
 	}
 
