@@ -11,15 +11,15 @@ public class ScrabbleWordSuggestor
 	
 	public void wordSuggestions(String rack)
 	{
-		WordSuggester wordSuggestor = new WordSuggester (rack,coreDictionary.getDictionary());
+		WordSuggester wordSuggestor = new WordSuggester (rack);
 		List<Word> wordSuggestions = wordSuggestor.getMaxScoreWords();
 		printWordSuggestions(wordSuggestions);
 	}
 	
 	public void wordSuggestions(String rack, String constraint)
 	{
-		WordSuggester wordSuggestor = new WordSuggester (rack,coreDictionary.getDictionary());
-		List<Word> wordSuggestions = wordSuggestor.getMaxScoreWords(rack, constraint,this.coreDictionary);
+		WordSuggester wordSuggestor = new WordSuggester (rack);
+		List<Word> wordSuggestions = wordSuggestor.getMaxScoreWords(rack, constraint);
 		printWordSuggestions(wordSuggestions);
 	}
 	
