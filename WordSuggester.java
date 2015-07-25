@@ -48,8 +48,8 @@ public class WordSuggester {
         int total = 0;
         for(int i = 0;i < word.length();i++)
         {
-            int c = ((int)word.charAt(i)) % 97;
-            total += val[c];
+           
+            total += val[word.charAt(i)-'a'];
         }
 
         return total;
