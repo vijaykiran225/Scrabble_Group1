@@ -34,9 +34,12 @@ public class ScrabbleWords {
 	}
 
 	public static List<String> getWords(String key) {
-		if(dictionary.containsKey(key))
-			return dictionary.get(key);
-		return null;
+		String sortedKey = sortWord(key);
+		if(dictionary.containsKey(sortedKey))
+		{	
+			return dictionary.get(sortedKey);
+		}
+			return null;
 		
 	}
 	
@@ -64,7 +67,7 @@ public class ScrabbleWords {
 		}
 	}
 
-	private String sortWord(String originalString) {
+	private static String sortWord(String originalString) {
 		char[] chars = originalString.toCharArray();
 		Arrays.sort(chars);
 		String sortedString = new String(chars);
@@ -76,15 +79,14 @@ public class ScrabbleWords {
 		List<String> wordList = wordCombinations.getKeyCombination();
 		for (String line : wordList) {     	
 		 	String sortedWord = sortWord(line);
-			
 			if (dictionary.containsKey(sortedWord)) {
 				dictionary.get(sortedWord).add(word);
 			} else {				
-				//System.out.println(line+ ":" + score);
 				dictionary.put(sortedWord, new ArrayList<String>());
 			    dictionary.get(sortedWord).add(word);
 			}
 		}
 	}
+	
 
 }
