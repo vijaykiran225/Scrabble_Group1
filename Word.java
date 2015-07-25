@@ -4,7 +4,6 @@ public class Word implements Comparable<Word> {
     private String word;
     private int score;
     private int length;
-    private String key;
 
     public Word(String word, int score) {
         this.word = word;
@@ -12,6 +11,9 @@ public class Word implements Comparable<Word> {
         this.score = score;
     }
 
+    /**
+     * @return String stored in the word
+     */
     public String getWord() {
         return word;
     }
@@ -20,25 +22,29 @@ public class Word implements Comparable<Word> {
         this.word = word;
     }
 
+    /**
+     * @return Score of the word currently generated using Scrabble values of alphabets
+     * @see <a href="http://www.wordfind.com/scrabble-letter-values/">Scrabble Letter Values</a>
+     */
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    /**
+     * Used to compare to words
+     * @param comparedWord Word to be compared with
+     * @return 1 if the comparedWord has an equivalent score, else 0
+     */
+    public int compareTo(Word comparedWord) {
+        return Integer.compare(comparedWord.getScore(), this.getScore());
     }
 
-    public int getLength(){
-        return length;
-    }
-
-
-    public int compareTo(Word o) {
-        return Integer.compare(o.getScore(),this.getScore());
-    }
-	
+    /**
+     * @return String containing the word along with it's score
+     */
 	public String toString()
 	{
 		return "Word : " + getWord() + " --- "  +" Score : " + getScore();
 	}
+
 }

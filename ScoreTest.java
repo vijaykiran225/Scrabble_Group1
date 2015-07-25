@@ -1,4 +1,4 @@
-//package com.test;
+package Scrabble_Group1;
 
 import static org.junit.Assert.*;
 
@@ -9,8 +9,8 @@ public class ScoreTest {
 	@Test
 	public void testGetScores() {
 		Score s=new Score();
-		assertEquals(s.getScores(""),0);
-		assertEquals(s.getScores("hello"),8);
+		assertEquals(s.getScrabbleScore(""),0);
+		assertEquals(s.getScrabbleScore("hello"),8);
 	}
 
 }

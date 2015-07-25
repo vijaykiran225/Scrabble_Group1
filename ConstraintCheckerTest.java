@@ -1,24 +1,24 @@
+package Scrabble_Group1;
+
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import Scrabble_Group1.ConstraintChecker;
 import org.junit.Before;
 import org.junit.Test;
 
 public class ConstraintCheckerTest {
 
-		
-		//WordSuggester ws ;
 		ConstraintChecker c ;
 		
 		@Before
 		public void setUp() {	
-			//ws= new WordSuggester("hello");
 			c= new ConstraintChecker();
 		}
 		
-		@Test
+		/*@Test
 		public void testGetAllWords(){
 			List<String> testStrings = new ArrayList<String>();
 			testStrings.add("hello");
@@ -53,24 +53,13 @@ public class ConstraintCheckerTest {
 			assertEquals(false,c.wordMatches(testConstraint, word1));
 			
 		}
-		
-		@Test
+
+        @Test
 		public void testGetNewRack(){
 			String testRack = "rack";
 			String testConstraint = "h**lo";
 			String output = "rackhlo";
 			assertEquals(output,c.getNewRack(testRack, testConstraint));
-		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		}*/
+
 }

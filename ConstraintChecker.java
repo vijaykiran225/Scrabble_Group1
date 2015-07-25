@@ -10,23 +10,26 @@ import java.util.regex.Pattern;
  
 public class ConstraintChecker {
 
+	/**
+	 * finds all words possible using the rack satisfying the board constraint
+	 * @param rack list of letter present with the user
+	 * @param constraint Restriction because of existing letters on board
+	 * @return list of possible Scrabble words
+	 */
 	public static List<String> wordWithConstraints(String rack, String constraint) {
-		
-		List<String> keyList = new ArrayList<String>();
+
 		WordSuggester ws = new WordSuggester(getNewRack(rack,constraint));
-		keyList = ws.getValidKeys();
-	
-		List<String> wordList = new ArrayList<String>();
-		wordList = getWordList(keyList); 
+		List<String> keyList = ws.getValidKeys();
+		List<String> wordList = getWordList(keyList);
 		
 		return getAllWords(wordList, constraint);
 		
 	}
+
 	private static String getNewRack(String rack, String constraint){
 		
 		int index = 0;
-		int len = constraint.length();
-		while( index < len){
+		while( index < constraint.length()){
 			char ch = constraint.charAt(index);
 			if('a' <= ch && ch <= 'z') {
 				rack += ch;
@@ -34,23 +37,18 @@ public class ConstraintChecker {
 			index++;
 		}
 		return rack;
-		
+
 	}
+
 	private static List<String> getWordList(List<String> keyList){
 		
 		    List<String> wordList = new ArrayList<String>();
 		    Iterator<String> itr = keyList.iterator();
 		    
-		    while(itr.hasNext()){
-		    	
+		    while(itr.hasNext())
 		    	wordList.addAll(ScrabbleWords.getInstance().getWords(itr.next()));
-		    }	
-		
+
 		return wordList;		
-	}
-	
-	private static boolean wordMatches(String constraint, String word){
-		return Pattern.matches(getRegEx(constraint), word);
 	}
 
 	private static List<String> getAllWords(List<String> wordList, String constraint){
@@ -66,6 +64,10 @@ public class ConstraintChecker {
 		
 	}
 
+	private static boolean wordMatches(String constraint, String word){
+		return Pattern.matches(getRegEx(constraint), word);
+	}
+
 	private static String getRegEx(String constraint){
 		
 		String regEx = ".*";
@@ -75,7 +77,7 @@ public class ConstraintChecker {
 				regEx =regEx +  c;
 			}
 			else {
-				regEx=regEx+"[a-z]";
+				regEx=regEx + "[a-z]";
 			}
 		}
 		regEx = regEx + ".*";

@@ -3,21 +3,11 @@ package Scrabble_Group1;
 import java.util.*;
 
 public class WordSuggester {
-
-	private int max_score;
-	private String max_score_words;
-	private String rack;
+    private String rack;
 	private final int NUMBER_OF_WORDS = 10;
 
 	public WordSuggester(String rack) {
-		max_score = 0;
-		max_score_words = "";
 		this.rack = rack;
-	}
-
-	public WordSuggester() {
-		max_score = 0;
-		max_score_words = "";
 	}
 
 	private List<String> getCombinationsOfWord(String word) {
@@ -44,57 +34,52 @@ public class WordSuggester {
 		return new String(alphabets);
 	}
 
-	private boolean ifKeyExists(String word, Map<String, List<Word>> dictionary) {
-
-		if (word.contains("*")) {
-			return dictionary.containsKey(word);
-		} else {
-			return dictionary.containsKey(sortCharactersInWord(word));
-		}
-
-	}
-
-	private List<String> generate_valid_keys(List<String> keys) {
-		List<String> valid_keys = new ArrayList<String>();
-		for (String key : keys) {
-			if (ScrabbleWords.getInstance().isValidKey(key))
-				valid_keys.add(key);
-		}
-
-		return valid_keys;
-	}
-
+    /**
+     * @return list of valid keys
+     */
 	public List<String> getValidKeys() {
-		return generate_valid_keys(getCombinationsOfWord(rack));
+        List<String> valid_keys = new ArrayList<String>();
+        for(String key : getCombinationsOfWord(rack)){
+            if (ScrabbleWords.getInstance().isValidKey(key))
+                valid_keys.add(key);
+        }
+
+        return valid_keys;
 	}
 
-	public List<Word> MaxScoreWords(List<String> validRackCombinations) {
-		ArrayList<String> maxScoreWords = new ArrayList<String>();
-		for (String validRackWord : validRackCombinations) {
-			maxScoreWords.addAll(ScrabbleWords.getWords(validRackWord));
-		}
-		return getTopTenWordSuggestions(maxScoreWords);
-	}
-
-	private List<Word> getTopTenWordSuggestions(List<String> words) {
-		ArrayList<Word> wordList = new ArrayList<Word>();
-		for (String word : words) {
-			int score = Score.getScores(word);
-			wordList.add(new Word(word, score));
-		}
-		Collections.sort(wordList);
-		ArrayList<Word> wordSuggestions = new ArrayList<Word>();
-		for (int i = 0; i <= NUMBER_OF_WORDS && i < wordList.size(); i++) {
-			wordSuggestions.add(wordList.get(i));
-		}
-		return wordSuggestions;
-	}
-
+    /**
+     * Generates maximum scoring words generated using the rack
+     * @return list of maximum scoring words
+     */
 	public List<Word> getMaxScoreWords() {
-		return MaxScoreWords(generate_valid_keys(getCombinationsOfWord(rack)));
+        ArrayList<String> maxScoreWords = new ArrayList<String>();
+        for (String validRackWord : getValidKeys()) {
+            maxScoreWords.addAll(ScrabbleWords.getWords(validRackWord));
+        }
+        return getTopTenWordSuggestions(maxScoreWords);
 	}
 
+    /**
+     * Generates maximum scoring words using the rack satisfying the constraint on board
+     * @param rack set of alphabets provided by user
+     * @param constraint restrictions specified on board
+     * @return list of maximum scoring words
+     */
 	public List<Word> getMaxScoreWords(String rack, String constraint) {
 		return getTopTenWordSuggestions(ConstraintChecker.wordWithConstraints(rack, constraint));
 	}
+
+    private List<Word> getTopTenWordSuggestions(List<String> words) {
+        ArrayList<Word> wordList = new ArrayList<Word>();
+        for (String word : words) {
+            int score = Score.getScrabbleScore(word);
+            wordList.add(new Word(word, score));
+        }
+        Collections.sort(wordList);
+        ArrayList<Word> wordSuggestions = new ArrayList<Word>();
+        for (int i = 0; i <= NUMBER_OF_WORDS && i < wordList.size(); i++) {
+            wordSuggestions.add(wordList.get(i));
+        }
+        return wordSuggestions;
+    }
 }
